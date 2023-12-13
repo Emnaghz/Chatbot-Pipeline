@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'docker'
+    }
     environment {
         SCANNER_HOME = tool 'sonarscanner'
     }
