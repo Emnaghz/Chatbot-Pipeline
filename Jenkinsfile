@@ -4,6 +4,25 @@ pipeline{
         SCANNER_HOME = tool 'sonarscanner'
     }
     stages{
+
+        stage("Check and Install Docker") {
+            steps {
+                script {
+                    def isDockerInstalled = sh(script: "docker --version", returnStatus: true) == 0
+                    if (!isDockerInstalled) {
+                        echo "Docker is not installed. Installing Docker..."
+                        sh 'curl -fsSL https://get.docker.com -o get-docker.sh'
+                        sh 'sh get-docker.sh'
+                        sh 'sudo usermod -aG docker $USER'
+                        sh 'sudo systemctl restart jenkins'
+                        echo "Docker installed successfully."
+                    } else {
+                        echo "Docker is already installed."
+                    }
+                }
+            }
+        }
+        
         stage("SonarQube analysis"){
             steps{
                 // slackSend channel: "#devops-project", color: "#439FE0", message: "Test Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
