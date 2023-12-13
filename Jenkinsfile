@@ -7,7 +7,6 @@ pipeline {
     }
 
     stages {
-
         stage('SonarQube analysis') {
             steps {
                 // slackSend channel: "#devops-project", color: "#439FE0", message: "Test Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
@@ -47,18 +46,18 @@ pipeline {
     //     }
     // }
 
-     stage("Build & Push Docker Image") {
+        stage('Build & Push Docker Image') {
             steps {
                 script {
                     // Build Docker image
                     sh 'docker build -t chatbot:latest .'
 
                     // Log in to Docker Hub
-                    
-                    sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
-
+                    withCredentials([usernamePassword(credentialsId: 'DOCKERHUB_CREDENTIALS', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                        sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                    }
                     // Push Docker image to Docker Hub
-                    sh "docker push emnaghzayel/chatbot:latest"
+                    sh 'docker push emnaghzayel/chatbot:latest'
                 }
             }
         }
