@@ -54,12 +54,11 @@ pipeline {
                     sh 'docker build -t chatbot:latest .'
 
                     // Log in to Docker Hub
-                    def DOCKERHUB_USERNAME = DOCKERHUB_CREDENTIALS.username
-                    def DOCKERHUB_PASSWORD = DOCKERHUB_CREDENTIALS.password
+                    
                     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
 
                     // Push Docker image to Docker Hub
-                    sh "docker push ${DOCKERHUB_USERNAME}/chatbot:latest"
+                    sh "docker push emnaghzayel/chatbot:latest"
                 }
             }
         }
