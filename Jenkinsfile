@@ -9,10 +9,8 @@ pipeline {
         stage('Docker Test') {
             steps {
                 script {
-                    docker.image('alpine').inside {
-                        sh 'echo "Hello from Docker"'
-                    }
-                }I
+                    sh 'docker ps'
+                }
             }
         }
 
