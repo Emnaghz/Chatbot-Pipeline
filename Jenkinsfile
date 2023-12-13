@@ -1,17 +1,12 @@
 pipeline {
     agent any
+
     environment {
         SCANNER_HOME = tool 'sonarscanner'
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
     }
-    stages {
 
-        stage('Docker Test') {
-            steps {
-                script {
-                    sh 'docker ps'
-                }
-            }
-        }
+    stages {
 
         stage('SonarQube analysis') {
             steps {
@@ -52,22 +47,18 @@ pipeline {
     //     }
     // }
 
-     stage("Build Docker Image") {
+     stage("Build & Push Docker Image") {
             steps {
-                
-                    sh 'docker build -t chatbot .'
-                    sh 'docker images'
-                
                 // Build Docker image
-                // sh "docker build -t EmnaGhzayel/testJenkins:latest ."
+                    sh 'docker build -t chatbot:latest .'
 
                 // Log in to Docker Hub
                 // withCredentials([usernamePassword(credentialsId: 'your-dockerhub-credentials-id', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                //     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                    sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
                 // }
 
                 // // Push Docker image to Docker Hub
-                // sh "docker push EmnaGhzayel/testJenkins:latest"
+                sh "docker push ${DOCKERHUB_USERNAME}/chatbot:latest"
             }
         }
     }
