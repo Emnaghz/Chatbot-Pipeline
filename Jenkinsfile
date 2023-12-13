@@ -4,8 +4,6 @@ pipeline {
     environment {
         SCANNER_HOME = tool 'sonarscanner'
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
-        DOCKERHUB_USERNAME = credentials('dockerhub-credentials').username
-        DOCKERHUB_PASSWORD = credentials('dockerhub-credentials').password
     }
 
     stages {
@@ -53,6 +51,9 @@ pipeline {
             steps {
                 // Build Docker image
                     sh 'docker build -t chatbot:latest .'
+                
+                def DOCKERHUB_USERNAME = DOCKERHUB_CREDENTIALS.username
+                def DOCKERHUB_PASSWORD = DOCKERHUB_CREDENTIALS.password
 
                 // Log in to Docker Hub
                     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
