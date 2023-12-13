@@ -2,8 +2,22 @@ pipeline {
     agent any
     environment {
         SCANNER_HOME = tool 'sonarscanner'
+        DOCKER_HOME = '/var/jenkins_home/tools/hudson.plugins.docker.tools.DockerTool/docker'
     }
     stages {
+         stage("Setup") {
+            steps {
+                script {
+                    // Install Docker client
+                    sh """
+                        curl -fsSL https://get.docker.com -o get-docker.sh
+                        sh get-docker.sh
+                        ln -s /usr/bin/docker ${DOCKER_HOME}
+                    """
+                }
+            }
+        }
+
         stage('Docker Test') {
             steps {
                 script {
