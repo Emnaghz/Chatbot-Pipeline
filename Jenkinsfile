@@ -53,9 +53,11 @@ pipeline {
                     sh 'docker build -t chatbot:latest .'
 
                     // Log in to Docker Hub
-                    withCredentials([usernamePassword(credentialsId: 'DOCKERHUB_CREDENTIALS', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                        sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
-                    }
+                    // withCredentials([usernamePassword(credentialsId: 'DOCKERHUB_CREDENTIALS', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                    //     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                    // }
+
+                    sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                     // Push Docker image to Docker Hub
                     sh 'docker push emnaghzayel/chatbot:latest'
                 }
