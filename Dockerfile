@@ -1,11 +1,20 @@
-FROM jenkins/jenkins:lts
+# Use a base image with Node.js and npm
+FROM node:18-alpine
 
-USER root
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-RUN apt-get update && \
-    apt-get install -y sudo && \
-    usermod -aG sudo jenkins && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# Copy package.json and package-lock.json to the working directory
+COPY package.json ./
 
-USER jenkins
+# Install app dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port your app will run on
+EXPOSE 5173
+
+# Command to run the application
+CMD ["npm","run","dev"]

@@ -51,5 +51,24 @@ pipeline {
     //         }
     //     }
     // }
+
+     stage("Build Docker Image") {
+            steps {
+                
+                    sh 'docker build -t ChatGPT-chatbot/latest .'
+                    sh 'docker images'
+                
+                // Build Docker image
+                // sh "docker build -t EmnaGhzayel/testJenkins:latest ."
+
+                // Log in to Docker Hub
+                // withCredentials([usernamePassword(credentialsId: 'your-dockerhub-credentials-id', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                //     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                // }
+
+                // // Push Docker image to Docker Hub
+                // sh "docker push EmnaGhzayel/testJenkins:latest"
+            }
+        }
     }
 }
