@@ -6,11 +6,13 @@ pipeline {
         SCANNER_HOME = tool 'sonarscanner'
     }
     stages {
-        stage('Check and Install Docker') {
+        stage('Docker Test') {
             steps {
                 script {
-                    sh 'docker ps'
-                }
+                    docker.image('alpine').inside {
+                        sh 'echo "Hello from Docker"'
+                    }
+                }I
             }
         }
 
