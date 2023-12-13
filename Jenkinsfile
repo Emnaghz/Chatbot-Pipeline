@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'docker build -t chatbot:latest .'
+                    sh 'docker build -t emnaghzayel/chatbot:latest .'
 
                     // Log in to Docker Hub
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
