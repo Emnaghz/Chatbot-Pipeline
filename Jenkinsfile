@@ -55,7 +55,7 @@ pipeline {
      stage("Build Docker Image") {
             steps {
                 
-                    sh 'docker build -t ChatGPT-chatbot/latest .'
+                    sh 'docker build -t chatbot .'
                     sh 'docker images'
                 
                 // Build Docker image
