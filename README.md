@@ -1,8 +1,38 @@
-# React + Vite
+# ChatGPT React Chatbot with Jenkins CI/CD Pipeline
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Table of Contents
 
-Currently, two official plugins are available:
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+  - [Cloning the Repository](#cloning-the-repository)
+  - [Run the Code](#run-the-code)
+- [Pipeline Integration](#pipeline-integration)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
+
+This project showcases the integration of a ChatGPT chatbot into a React application, initiated with Vite. The implementation is orchestrated through a Jenkins pipeline with SonarQube and Slack integration. The code is containerized and pushed to DockerHub for effortless deployment.
+
+## Getting Started
+### Cloning the Repository
+Clone the repository to your local machine:
+```
+git clone https://github.com/Emnaghz/Chatbot-Pipeline.git
+```
+### Run the Code
+First, navigate to the project directory and install the project dependencies:
+```
+npm install
+```
+start the application
+```
+npm run dev
+```
+## Pipeline Integration
+To test the pipeline integration, ensure Docker and its utilities are installed on your machine. 
+Run the following command:
+```
+docker compose up
+```
+Access the Jenkins interface at [https://localhost:8080](https://localhost:8080) and the SonarQube interface at [https://localhost:9000](https://localhost:9000).
+
+For a detailed walkthrough of the CI/CD pipeline implementation, refer to my published article on Medium by clicking [here](#).
