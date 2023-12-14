@@ -49,17 +49,23 @@ pipeline {
         stage('Build & Push Docker Image') {
             steps {
                 script {
-                    // Build Docker image
-                    sh 'docker build -t emnaghzayel/chatbot:latest .'
-
-                    // Log in to Docker Hub
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                        // Build Docker image
+                        sh "docker build -t ${DOCKERHUB_USERNAME}/chatbot:latest ."
+
+                         // Log in to Docker Hub
                         sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+
+                        // Push Docker image to Docker Hub
+                        sh "docker push ${DOCKERHUB_USERNAME}/chatbot:latest"
                     }
-                    // Push Docker image to Docker Hub
-                    sh 'docker push emnaghzayel/chatbot:latest'
                 }
             }
         }
     }
+    post {
+		always {
+			sh 'docker logout'
+		}
+	}
 }
