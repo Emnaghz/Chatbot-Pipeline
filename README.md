@@ -35,4 +35,4 @@ docker compose up
 ```
 Access the Jenkins interface at [https://localhost:8080](https://localhost:8080) and the SonarQube interface at [https://localhost:9000](https://localhost:9000).
 
-For a detailed walkthrough of the CI/CD pipeline implementation, refer to my published article on Medium by clicking [here](#).
+For a detailed walkthrough of the CI/CD pipeline implementation, refer to my published article on Medium by clicking [here](https://medium.com/@emnaghzaiel176/a-comprehensive-guide-to-building-a-ci-cd-pipeline-with-jenkins-sonarqube-and-slack-integration-af01f834eca).
