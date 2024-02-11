@@ -12,6 +12,8 @@
 
 This project showcases the integration of a ChatGPT chatbot into a React application, initiated with Vite. The implementation is orchestrated through a Jenkins pipeline with SonarQube and Slack integration. The code is containerized and pushed to DockerHub for effortless deployment.
 
+![](images/img1.png "Figure 1 : CI/CD Pipeline Overview.")
+
 ## Getting Started
 ### Cloning the Repository
 Clone the repository to your local machine:
@@ -36,3 +38,4 @@ docker compose up
 Access the Jenkins interface at [https://localhost:8080](https://localhost:8080) and the SonarQube interface at [https://localhost:9000](https://localhost:9000).
 
 For a detailed walkthrough of the CI/CD pipeline implementation, refer to my published article on Medium by clicking [here](https://medium.com/@emnaghzaiel176/a-comprehensive-guide-to-building-a-ci-cd-pipeline-with-jenkins-sonarqube-and-slack-integration-af01f834eca).
+![](images/img2.png "Figure 2 : Medium Article.")
